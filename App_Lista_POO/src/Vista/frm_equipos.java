@@ -12,6 +12,7 @@ public class frm_equipos extends javax.swing.JFrame {
  
     public frm_equipos() {
         initComponents();
+        btn_actualizar.setEnabled(false);
     }
 
    
@@ -272,6 +273,7 @@ public class frm_equipos extends javax.swing.JFrame {
       txt_especificaciones.setText("");
       txt_configuracion.setText("");
       txt_fecha.setText("");
+      btn_actualizar.setEnabled(false);
       txt_codigo.requestFocus();
     }//GEN-LAST:event_btn_nuevoActionPerformed
 
@@ -299,18 +301,25 @@ public class frm_equipos extends javax.swing.JFrame {
         
         if (bln_sw == false){
         JOptionPane.showMessageDialog(null,"No se encontraron registros", "Consultar",JOptionPane.ERROR_MESSAGE);
+        btn_actualizar.setEnabled(false); //Inhabilita el boton de actualizar
         }else{
             txt_especificaciones.setText(Equipos.get(int_posicion).getStr_especificaciones());
             txt_fecha.setText(Equipos.get(int_posicion).getStr_fecha());
             txt_nombre.setText(Equipos.get(int_posicion).getStr_nombre());
             txt_numero.setText(""+Equipos.get(int_posicion).getInt_numero());
             txt_configuracion.setText(Equipos.get(int_posicion).getStr_conf_red());
+             btn_actualizar.setEnabled(true); //Habilita el boton de actualizar
         }
             
     }//GEN-LAST:event_btn_consultarActionPerformed
 
     private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
-       
+        Equipos.get(int_posicion).setInt_numero(Integer.parseInt(txt_numero.getText()));
+        Equipos.get(int_posicion).setStr_conf_red(txt_configuracion.getText());
+        Equipos.get(int_posicion).setStr_especificaciones(txt_especificaciones.getText());
+        Equipos.get(int_posicion).setStr_fecha(txt_fecha.getText());
+        Equipos.get(int_posicion).setStr_nombre(txt_nombre.getText());
+        JOptionPane.showMessageDialog(null,"Equipo actualizado con éxito", "Actualizar",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btn_actualizarActionPerformed
 
     private void txt_numeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_numeroActionPerformed
