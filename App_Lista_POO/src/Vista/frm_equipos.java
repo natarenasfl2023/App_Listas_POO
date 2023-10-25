@@ -286,7 +286,27 @@ public class frm_equipos extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed
+        bln_sw = false;
+        int_posicion = 0;
         
+        for (int i = 0; i < Equipos.size(); i++){
+            if(txt_codigo.getText().equals(Equipos.get(i).getStr_codigo())){
+            bln_sw = true;
+            int_posicion = i;
+            break;
+            }
+        }
+        
+        if (bln_sw == false){
+        JOptionPane.showMessageDialog(null,"No se encontraron registros", "Consultar",JOptionPane.ERROR_MESSAGE);
+        }else{
+            txt_especificaciones.setText(Equipos.get(int_posicion).getStr_especificaciones());
+            txt_fecha.setText(Equipos.get(int_posicion).getStr_fecha());
+            txt_nombre.setText(Equipos.get(int_posicion).getStr_nombre());
+            txt_numero.setText(""+Equipos.get(int_posicion).getInt_numero());
+            txt_configuracion.setText(Equipos.get(int_posicion).getStr_conf_red());
+        }
+            
     }//GEN-LAST:event_btn_consultarActionPerformed
 
     private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
