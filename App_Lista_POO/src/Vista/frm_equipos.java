@@ -13,6 +13,7 @@ public class frm_equipos extends javax.swing.JFrame {
     public frm_equipos() {
         initComponents();
         btn_actualizar.setEnabled(false);
+        btn_borrar.setEnabled(false);
     }
 
    
@@ -42,6 +43,7 @@ public class frm_equipos extends javax.swing.JFrame {
         btn_guardar = new javax.swing.JButton();
         btn_consultar = new javax.swing.JButton();
         btn_actualizar = new javax.swing.JButton();
+        btn_borrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,6 +150,14 @@ public class frm_equipos extends javax.swing.JFrame {
             }
         });
 
+        btn_borrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_borrar.setText("Borrar");
+        btn_borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_borrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -155,6 +165,7 @@ public class frm_equipos extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_consultar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,7 +183,9 @@ public class frm_equipos extends javax.swing.JFrame {
                 .addComponent(btn_consultar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -226,13 +239,11 @@ public class frm_equipos extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -274,6 +285,7 @@ public class frm_equipos extends javax.swing.JFrame {
       txt_configuracion.setText("");
       txt_fecha.setText("");
       btn_actualizar.setEnabled(false);
+      btn_borrar.setEnabled(false);
       txt_codigo.requestFocus();
     }//GEN-LAST:event_btn_nuevoActionPerformed
 
@@ -302,6 +314,7 @@ public class frm_equipos extends javax.swing.JFrame {
         if (bln_sw == false){
         JOptionPane.showMessageDialog(null,"No se encontraron registros", "Consultar",JOptionPane.ERROR_MESSAGE);
         btn_actualizar.setEnabled(false); //Inhabilita el boton de actualizar
+        btn_borrar.setEnabled(false);
         }else{
             txt_especificaciones.setText(Equipos.get(int_posicion).getStr_especificaciones());
             txt_fecha.setText(Equipos.get(int_posicion).getStr_fecha());
@@ -309,6 +322,7 @@ public class frm_equipos extends javax.swing.JFrame {
             txt_numero.setText(""+Equipos.get(int_posicion).getInt_numero());
             txt_configuracion.setText(Equipos.get(int_posicion).getStr_conf_red());
              btn_actualizar.setEnabled(true); //Habilita el boton de actualizar
+             btn_borrar.setEnabled(true);
         }
             
     }//GEN-LAST:event_btn_consultarActionPerformed
@@ -325,6 +339,11 @@ public class frm_equipos extends javax.swing.JFrame {
     private void txt_numeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_numeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_numeroActionPerformed
+
+    private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed
+       Equipos.remove(int_posicion);
+       JOptionPane.showMessageDialog(null, "¡Equipo borrado con éxito!", "Borrar", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btn_borrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,6 +382,7 @@ public class frm_equipos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_actualizar;
+    private javax.swing.JButton btn_borrar;
     private javax.swing.JButton btn_consultar;
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_nuevo;
